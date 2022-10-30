@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectType extends Model
 {
     use HasFactory;
+
+    public function structures()
+    {
+        return $this->hasMany(ProjectStructure::class);
+    }
 }
