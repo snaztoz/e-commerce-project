@@ -18,4 +18,9 @@ class Workspace extends Model
     {
         return $this->belongsTo(ProjectType::class);
     }
+
+    public function details()
+    {
+        return $this->hasMany(WorkspaceDetail::class);
+    }
 }
