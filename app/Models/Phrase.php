@@ -13,4 +13,9 @@ class Phrase extends Model
     {
         return $this->belongsTo(Bibliography::class);
     }
+
+    public function citations()
+    {
+        return $this->hasMany(WorkspaceDetailCitation::class);
+    }
 }

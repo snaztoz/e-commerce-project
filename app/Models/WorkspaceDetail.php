@@ -13,4 +13,9 @@ class WorkspaceDetail extends Model
     {
         return $this->belongsTo(Workspace::class);
     }
+
+    public function citations()
+    {
+        return $this->hasMany(WorkspaceDetailCitation::class);
+    }
 }
