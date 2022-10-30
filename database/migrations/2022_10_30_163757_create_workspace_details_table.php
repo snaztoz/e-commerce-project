@@ -20,8 +20,16 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignIdFor(ProjectStructure::class);
-            $table->foreignIdFor(Workspace::class);
+            $table
+                ->foreignIdFor(ProjectStructure::class)
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table
+                ->foreignIdFor(Workspace::class)
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->text('content');
         });

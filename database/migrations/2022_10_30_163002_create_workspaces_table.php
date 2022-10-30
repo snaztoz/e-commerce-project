@@ -20,8 +20,16 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignIdFor(ProjectType::class);
-            $table->foreignIdFor(User::class);
+            $table
+                ->foreignIdFor(ProjectType::class)
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table
+                ->foreignIdFor(User::class)
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->string('title', 1024);
         });

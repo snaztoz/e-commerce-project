@@ -20,8 +20,16 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignIdFor(Phrase::class);
-            $table->foreignIdFor(WorkspaceDetail::class);
+            $table
+                ->foreignIdFor(Phrase::class)
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table
+                ->foreignIdFor(WorkspaceDetail::class)
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

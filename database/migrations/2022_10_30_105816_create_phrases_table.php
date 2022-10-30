@@ -19,7 +19,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignIdFor(Bibliography::class);
+            $table
+                ->foreignIdFor(Bibliography::class)
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->text('phrase');
         });

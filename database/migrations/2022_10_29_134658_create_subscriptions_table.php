@@ -20,8 +20,16 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(SubscriptionPlan::class);
+            $table
+                ->foreignIdFor(User::class)
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table
+                ->foreignIdFor(SubscriptionPlan::class)
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
