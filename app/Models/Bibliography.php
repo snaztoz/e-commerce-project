@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Bibliography extends Model
 {
     use HasFactory;
+
+    public function phrases()
+    {
+        return $this->hasMany(Phrase::class);
+    }
 }
