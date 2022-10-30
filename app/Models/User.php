@@ -47,6 +47,11 @@ class User extends Authenticatable
         return $this->hasMany(Subscription::class);
     }
 
+    public function workspaces()
+    {
+        return $this->hasMany(Workspace::class);
+    }
+
     public function activeSubscription()
     {
         // TODO

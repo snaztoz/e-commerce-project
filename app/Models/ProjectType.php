@@ -13,4 +13,9 @@ class ProjectType extends Model
     {
         return $this->hasMany(ProjectStructure::class);
     }
+
+    public function workspaces()
+    {
+        return $this->hasMany(Workspace::class);
+    }
 }
