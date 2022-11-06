@@ -1,11 +1,10 @@
 <?php
 
+use App\Models\ProjectStructure;
+use App\Models\Workspace;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
-use App\Models\ProjectStructure;
-use App\Models\Workspace;
 
 return new class extends Migration
 {
@@ -16,23 +15,26 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('workspace_details', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create(
+            'workspace_details',
+            function (Blueprint $table) {
+                $table->id();
+                $table->timestamps();
 
-            $table
-                ->foreignIdFor(ProjectStructure::class)
-                ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            $table
-                ->foreignIdFor(Workspace::class)
-                ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                $table
+                    ->foreignIdFor(ProjectStructure::class)
+                    ->constrained()
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
+                $table
+                    ->foreignIdFor(Workspace::class)
+                    ->constrained()
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
 
-            $table->text('content');
-        });
+                $table->text('content');
+            }
+        );
     }
 
     /**

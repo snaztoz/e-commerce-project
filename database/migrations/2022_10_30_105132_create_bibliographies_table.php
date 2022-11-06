@@ -13,22 +13,28 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bibliographies', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create(
+            'bibliographies',
+            function (Blueprint $table) {
+                $table->id();
+                $table->timestamps();
 
-            $table->enum('type', [
-                'journal',
-                'book',
-                'newspaper',
-                'website',
-                'proceeding',
-            ]);
+                $table->enum(
+                    'type',
+                    [
+                    'journal',
+                    'book',
+                    'newspaper',
+                    'website',
+                    'proceeding',
+                    ]
+                );
 
-            $table->string('title');
-            $table->year('year');
-            $table->string('doi');
-        });
+                $table->string('title');
+                $table->year('year');
+                $table->string('doi');
+            }
+        );
     }
 
     /**

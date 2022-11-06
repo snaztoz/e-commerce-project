@@ -1,11 +1,10 @@
 <?php
 
+use App\Models\Phrase;
+use App\Models\WorkspaceDetail;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
-use App\Models\Phrase;
-use App\Models\WorkspaceDetail;
 
 return new class extends Migration
 {
@@ -16,21 +15,24 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('workspace_detail_citations', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create(
+            'workspace_detail_citations',
+            function (Blueprint $table) {
+                $table->id();
+                $table->timestamps();
 
-            $table
-                ->foreignIdFor(Phrase::class)
-                ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            $table
-                ->foreignIdFor(WorkspaceDetail::class)
-                ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-        });
+                $table
+                    ->foreignIdFor(Phrase::class)
+                    ->constrained()
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
+                $table
+                    ->foreignIdFor(WorkspaceDetail::class)
+                    ->constrained()
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
+            }
+        );
     }
 
     /**

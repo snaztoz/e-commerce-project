@@ -13,12 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('project_types', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create(
+            'project_types',
+            function (Blueprint $table) {
+                $table->id();
+                $table->timestamps();
 
-            $table->string('name');
-        });
+                $table->string('name');
+            }
+        );
     }
 
     /**
