@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="E-Commerce Project Ruleset">
-    <description>Ruleset untuk project tugas besar E-Commerce
-    </description>
+    <description>Ruleset untuk project tugas besar E-Commerce</description>
+
+    <exclude-pattern>./public/*</exclude-pattern>
+    <exclude-pattern>./vendor/*</exclude-pattern>
+    <exclude-pattern>./node_modules/*</exclude-pattern>
+    <exclude-pattern>./storage/*</exclude-pattern>
+    <exclude-pattern>./resources/views/*</exclude-pattern>
+
     <rule ref="Generic.CodeAnalysis.EmptyStatement"/>
     <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop"/>
     <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"/>
@@ -11,7 +17,6 @@
     <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
     <rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
     <rule ref="Generic.ControlStructures.InlineControlStructure"/>
-    <rule ref="Generic.Files.LineLength"/>
     <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
     <rule ref="Generic.Formatting.SpaceAfterCast"/>
     <rule ref="Generic.Functions.CallTimePassByReference"/>
@@ -59,5 +64,4 @@
     <rule ref="PSR2.Methods.MethodDeclaration"/>
     <rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
     <rule ref="PSR2.Namespaces.UseDeclaration"/>
-    <rule ref="Zend.NamingConventions.ValidVariableName"/>
 </ruleset>

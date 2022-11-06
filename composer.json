@@ -47,7 +47,7 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "lint": "./vendor/bin/phpcs --ignore=./vendor/* --extensions=php ./"
+        "lint": "./vendor/bin/phpcs --colors --extensions=php ./"
     },
     "extra": {
         "laravel": {
