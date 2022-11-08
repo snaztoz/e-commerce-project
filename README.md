@@ -8,7 +8,7 @@
 
 ### Prerequisites
 
-- Install PHP versi `>= 8.0` dan juga MySQL (atau gunakan XAMPP jika ingin langsung keduanya terinstall).
+- Install PHP versi `>= 8.0` dan juga MySQL (atau gunakan XAMPP jika ingin langsung menginstall keduanya).
 - Clone project ini dan buka melalui text editor.
 
 ### Setting Up Project
@@ -38,15 +38,17 @@
 
 Sebelum melakukan kontribusi, ikuti langkah berikut:
 
-- [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) repo ini.
+- Clone repo ini.
 
-- Pada repository fork, buat perubahan pada branch git yang baru:
+- Buat branch git yang baru:
 
   ```shell
-  git checkout -b my-fix-branch
+  git checkout -b myname-featureX
   ```
 
-- Untuk memastikan konsistensi style pada *codebase*, jalankan linter sebelum melakukan commit:
+- Buat perubahan pada branch ini.
+
+- Untuk memastikan konsistensi style pada *codebase*, jalankan linter sebelum melakukan pull request:
 
   ```shell
   composer run lint
@@ -56,10 +58,10 @@ Sebelum melakukan kontribusi, ikuti langkah berikut:
 
 - Commit perubahan menggunakan pesan commit yang mengikuti style [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
-- Push branch ke GitHub:
+- Push branch ke remote repository (Github):
 
   ```bash
-  git push origin my-fix-branch
+  git push origin myname-featureX
   ```
 
-- Buka GitHub, lalu buat pull request baru ke branch `e-commerce-project:dev`.
+- Buka Github, lalu buat pull request baru ke branch `e-commerce-project:dev`.
