@@ -10,7 +10,7 @@
       <div class="mb-2">
         <label for="email" class="form-label">{{ __('Email') }}</label>
         <input type="email" class="form-control @error('email') is-invalid
-            @enderror" id="email" name="email"
+            @enderror" id="email" name="email" value="{{ old('email') }}"
             placeholder="your-email@email.com" required>
         <div class="invalid-feedback">
           @error('email') {{ $message }} @enderror
@@ -21,7 +21,7 @@
         <label for="password" class="form-label">{{ __('Password') }}</label>
         <input type="password" class="form-control @error('password') is-invalid
             @enderror" id="password" name="password" placeholder="your-password"
-            required>
+            value="{{ old('password') }}" required>
         <div class="invalid-feedback">
           @error('password') {{ $message }} @enderror
         </div>
