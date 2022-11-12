@@ -19,7 +19,7 @@
 
       <div class="mb-3">
         <label for="password" class="form-label">{{ __('Password') }}</label>
-        <input type="password" class="form-control @error('email') is-invalid
+        <input type="password" class="form-control @error('password') is-invalid
             @enderror" id="password" name="password" placeholder="your-password"
             required>
         <div class="invalid-feedback">
