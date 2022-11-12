@@ -9,50 +9,52 @@
 
       {{-- Username --}}
       <div class="mb-2">
-        <label for="name" class="form-label">{{ __('Username') }}</label>
-        <input type="text" class="form-control @error('name') is-invalid
-            @enderror" id="name" name="name" placeholder="alice"
-            value="{{ old('name') }}" required>
-        <div class="invalid-feedback">
-          @error('name') {{ $message }} @enderror
-        </div>
+        <x-forms.input-label for="name" :value="__('Username')" />
+        <x-forms.text-input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="yourName"
+            :value="old('name')" />
+        <x-forms.input-error name="name" />
       </div>
 
       {{-- Email --}}
       <div class="mb-2">
-        <label for="email" class="form-label">{{ __('Email') }}</label>
-        <input type="email" class="form-control @error('email') is-invalid
-            @enderror" id="email" name="email" value="{{ old('email') }}"
-            placeholder="your-email@email.com" required>
-        <div class="invalid-feedback">
-          @error('email') {{ $message }} @enderror
-        </div>
+        <x-forms.input-label for="email" :value="__('Email')" />
+        <x-forms.text-input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="your-email@email.com"
+            :value="old('email')" />
+        <x-forms.input-error name="email" />
       </div>
 
       {{-- Password --}}
       <div class="mb-2">
-        <label for="password" class="form-label">{{ __('Password') }}</label>
-        <input type="password" class="form-control @error('password') is-invalid
-            @enderror" id="password" name="password" placeholder="your-password"
-            required>
-        <div class="invalid-feedback">
-          @error('password') {{ $message }} @enderror
-        </div>
+        <x-forms.input-label for="password" :value="__('Password')" />
+        <x-forms.text-input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="your-password"
+            :value="old('password')" />
+        <x-forms.input-error name="password" />
       </div>
 
       {{-- Password Confirmation --}}
       <div class="mb-4">
-        <label for="password_confirmation" class="form-label">
-          {{ __('Confirm Password') }}
-        </label>
-        <input type="password" class="form-control
-            @error('password_confirmation') is-invalid @enderror"
-            id="password_confirmation" name="password_confirmation"
-            placeholder="confirm password"
-            required>
-        <div class="invalid-feedback">
-          @error('password_confirmation') {{ $message }} @enderror
-        </div>
+        <x-forms.input-label
+            for="password_confirmation"
+            :value="__('Confirm Password')" />
+        <x-forms.text-input
+            type="password"
+            name="password_confirmation"
+            id="password_confirmation"
+            placeholder="your-password-again"
+            :value="old('password_confirmation')" />
+        <x-forms.input-error name="password_confirmation" />
       </div>
 
       <button type="submit" class="btn btn-primary mb-3 w-100">Register</button>
