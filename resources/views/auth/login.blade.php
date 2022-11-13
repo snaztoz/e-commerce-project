@@ -39,7 +39,9 @@
         </label>
       </div>
 
-      <button type="submit" class="btn btn-primary mb-3 w-100">Login</button>
+      <button type="submit" class="btn btn-primary mb-3 w-100">
+        {{ __('Login') }}
+      </button>
 
       <p class="text-center">
         <a href="{{ route('register') }}">

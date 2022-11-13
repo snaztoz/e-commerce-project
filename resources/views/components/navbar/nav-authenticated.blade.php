@@ -8,7 +8,7 @@
         class="nav-link"
         href="#"
         onclick="event.preventDefault(); document.querySelector('#logout-form').submit();" >
-      Logout
+      {{ __('Logout') }}
     </a>
   </li>
 </ul>
@@ -30,7 +30,7 @@
             class="dropdown-item"
             href="#"
             onclick="event.preventDefault(); document.querySelector('#logout-form').submit();" >
-          Logout
+          {{ __('Logout') }}
         </a>
       </li>
     </ul>

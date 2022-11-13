@@ -57,7 +57,9 @@
         <x-forms.input-error name="password_confirmation" />
       </div>
 
-      <button type="submit" class="btn btn-primary mb-3 w-100">Register</button>
+      <button type="submit" class="btn btn-primary mb-3 w-100">
+        {{ __('Register') }}
+      </button>
 
       <p class="text-center">
         <a href="{{ route('login') }}">
