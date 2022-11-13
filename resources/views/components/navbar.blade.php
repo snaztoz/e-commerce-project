@@ -9,14 +9,12 @@
     <div
         class="collapse navbar-collapse justify-content-end"
         id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        @auth
-          <x-navbar.nav-authenticated />
-        @endauth
-        @guest
-          <x-navbar.nav-guest />
-        @endguest
-      </ul>
+      @auth
+        <x-navbar.nav-authenticated />
+      @endauth
+      @guest
+        <x-navbar.nav-guest />
+      @endguest
     </div>
   </div>
 </nav>
