@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ProjectTypesController extends Controller
+class WorkspacesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,10 @@ class ProjectTypesController extends Controller
      */
     public function index()
     {
-        $projecttypes = DB::table('project_types')->get();
-        return view('projectTypes.index', ['projects' => $projecttypes]);
+        $workspace = DB::table('workspaces as w')
+            ->join('project_types as types', 'w.project_type_id', '=', 'types.id')
+            ->get();
+        return view('workspace.index', ['workspace' => $workspace]);
     }
 
     /**
@@ -25,7 +27,8 @@ class ProjectTypesController extends Controller
      */
     public function create()
     {
-        return view('projectTypes.create');
+        $projectType = DB::table('project_types')->get();
+        return view('workspace.create', ['types' => $projectType]);
     }
 
     /**
@@ -36,15 +39,23 @@ class ProjectTypesController extends Controller
      */
     public function store(Request $request)
     {
+
+        $idUser = DB::table('users') //delete once Auth::user()->id can be implemented
+            ->where('users.id', 1)
+            ->value('users.id');
+
         $request->validate(
-            ['name' => 'required']
+            ['projectTypeId' => 'required',
+            'title' => 'required']
         );
 
-        DB::table('project_types')->insert(
-            ['name' => $request->name,]
+        DB::table('workspaces')->insert(
+            ['project_type_id' => $request->projectTypeId,
+            'user_id' => $idUser, //change to Auth::user()->id
+            'title' => $request->title]
         );
 
-        return redirect('/types');
+        return redirect('/workspace');
     }
 
     /**

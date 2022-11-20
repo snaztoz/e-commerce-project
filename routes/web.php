@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WorkspacesController;
 use App\Http\Controllers\ProjectTypesController;
 
 /*
@@ -28,8 +29,12 @@ Route::get(
     }
 )->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('project', ProjectTypesController::class);
-Route::get('/project/create', [ProjectTypesController::class, 'create']);
-Route::post('/project/store', [ProjectTypesController::class, 'store']);
+Route::resource('workspace', WorkspacesController::class);
+Route::get('/workspace/create', [WorkspacesController::class, 'create']);
+Route::post('/workspace/store', [WorkspacesController::class, 'store']);
+
+Route::resource('types', ProjectTypesController::class);
+Route::get('/types/create', [ProjectTypesController::class, 'create']);
+Route::post('/types/store', [ProjectTypesController::class, 'store']);
 
 require __DIR__.'/auth.php';
