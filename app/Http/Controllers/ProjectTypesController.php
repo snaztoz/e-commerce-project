@@ -14,8 +14,8 @@ class ProjectTypesController extends Controller
      */
     public function index()
     {
-        $projecttype = DB::table('project_types')->get();
-        return view('projectview.index', ['projecttype' => $projecttype]);
+        $projecttypes = DB::table('project_types')->get();
+        return view('projectview.index', ['projects' => $projecttypes]);
     }
 
     /**

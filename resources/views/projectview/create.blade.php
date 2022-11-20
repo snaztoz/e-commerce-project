@@ -6,3 +6,5 @@
         <input type="text" name="name" required="required"> <br/>
 		<input type="submit" value="Simpan Data">
 </form>
+
+<!-- Todo -> fix view (add bootstrap) -->
