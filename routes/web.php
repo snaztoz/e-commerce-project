@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProjectTypesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +27,9 @@ Route::get(
         return view('dashboard');
     }
 )->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::resource('project', ProjectTypesController::class);
+Route::get('/project/create', [ProjectTypesController::class, 'create']);
+Route::post('/project/store', [ProjectTypesController::class, 'store']);
 
 require __DIR__.'/auth.php';
