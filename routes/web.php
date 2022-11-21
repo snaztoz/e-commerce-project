@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BibliographiesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get(
+    '/',
+    function () {
+        return view('welcome');
+    }
+);
+
+Route::get(
+    '/dashboard',
+    function () {
+        return view('dashboard');
+    }
+)->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::resource('bibliographies', BibliographiesController::class);
+Route::get('/bibliographies/create',[BibliographiesController::class, 'create']);
+Route::post('/bibliographies/store',[BibliographiesController::class, 'store']);
+Route::get('/bibliographies/destroy/{id}',[BibliographiesController::class, 'destroy']);
+
+Route::resource('bibliographies', BibliographiesController::class);
+Route::get('/bibliographies/create',[BibliographiesController::class, 'create']);
+Route::post('/bibliographies/store',[BibliographiesController::class, 'store']);
+Route::get('/bibliographies/destroy/{id}',[BibliographiesController::class, 'destroy']);
+
+require __DIR__.'/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
