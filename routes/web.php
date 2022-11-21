@@ -34,3 +34,7 @@ Route::post('/bibliographies/store',[BibliographiesController::class, 'store']);
 Route::get('/bibliographies/destroy/{id}',[BibliographiesController::class, 'destroy']);
 
 require __DIR__.'/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
