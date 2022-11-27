@@ -1,16 +1,22 @@
-<h1>Hello Project Creators</h1>
+@extends('layouts.base')
 
-<table border="1">
-	<tr>
-		<th>Id</th>
-		<th>Name</th>
-	</tr>
+@section('content')
+<h1>Project Types</h1>
+
+<table class="table">
+	<thead class="table-dark">
+		<tr>
+			<th>&nbsp;</th>
+			<th>Name</th>
+		</tr>
+	</thead>
 	@foreach($projects as $projects)
-	<tr>
-		<td>{{ $projects->id }}</td>
-		<td>{{ $projects->name }}</td>
-	</tr>
+	<tbody>
+		<tr>
+			<td>{{$loop -> iteration}}</td>
+			<td>{{ $projects->name }}</td>
+		</tr>
+	</tbody>
 	@endforeach
 </table>
-
-<!-- Todo -> fix view (add bootstrap) -->
+@endsection

@@ -1,18 +1,28 @@
-<h1>Hello Project Creators</h1>
+@extends('layouts.base')
 
-<table border="1">
-	<tr>
-		<th>Id</th>
-		<th>Project type</th>
-		<th>Name</th>
-	</tr>
+@section('content')
+<h1>Your Workspaces</h1>
+
+<table class="table">
+	<thead class="table-dark">
+		<tr>
+			<th>&nbsp;</th>
+			<th>Project type</th>
+			<th>Name</th>
+			<th>actions</th>
+		</tr>
+	</thead>
 	@foreach($workspace as $workspace)
-	<tr>
-		<td>{{ $workspace->id }}</td>
-		<td>{{ $workspace->name }}</td>
-		<td>{{ $workspace->title }}</td>
-	</tr>
+	<tbody>
+		<tr>
+			<td>{{$loop -> iteration}}</td>
+			<td>{{ $workspace->name }}</td>
+			<td>{{ $workspace->title }}</td>
+			<td>
+				<a href="/workspace/{{$workspace->id}}/edit" class="btn bg-primary" style="color: white">Edit</a>
+			</td>
+		</tr>
+	</tbody>
 	@endforeach
 </table>
-
-<!-- Todo -> fix view (add bootstrap) -->
+@endsection

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WorkspacesController;
 use App\Http\Controllers\ProjectTypesController;
+use App\Models\Workspace;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ Route::get(
 Route::resource('workspace', WorkspacesController::class);
 Route::get('/workspace/create', [WorkspacesController::class, 'create']);
 Route::post('/workspace/store', [WorkspacesController::class, 'store']);
+Route::get('/workspace/{Workspace}/edit', [Workspace::class, 'edit']);
+Route::put('/workspace/{Workspace}', [Workspace::class, 'update']);
 
 Route::resource('types', ProjectTypesController::class);
 Route::get('/types/create', [ProjectTypesController::class, 'create']);

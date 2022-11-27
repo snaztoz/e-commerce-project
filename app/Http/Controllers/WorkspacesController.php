@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Workspace;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,6 +17,7 @@ class WorkspacesController extends Controller
     {
         $workspace = DB::table('workspaces as w')
             ->join('project_types as types', 'w.project_type_id', '=', 'types.id')
+            ->select('w.id', 'w.title', 'types.name')
             ->get();
         return view('workspace.index', ['workspace' => $workspace]);
     }
@@ -77,7 +79,9 @@ class WorkspacesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $projectType = DB::table('project_types')->get();
+        $workspace = DB::table('workspaces')->find($id);
+        return view('workspace.update', ['workspace' => $workspace, 'types' => $projectType]);
     }
 
     /**
@@ -89,7 +93,19 @@ class WorkspacesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            ['projectTypeId' => 'required',
+            'title' => 'required']
+        );
+
+
+        Workspace::where('id', $id)
+            ->update(
+                ['project_type_id' => $request->projectTypeId,
+                'title' => $request->title]
+            );
+        
+        return redirect('/workspace');     
     }
 
     /**
