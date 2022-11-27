@@ -14,7 +14,7 @@
             type="text"
             name="name"
             id="name"
-            placeholder="yourName"
+            placeholder="your-name"
             :value="old('name')" />
         <x-forms.input-error name="name" />
       </div>
