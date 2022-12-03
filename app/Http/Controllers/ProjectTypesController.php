@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\ProjectType;
+
 class ProjectTypesController extends Controller
 {
     /**
@@ -14,8 +16,11 @@ class ProjectTypesController extends Controller
      */
     public function index()
     {
-        $projecttypes = DB::table('project_types')->get();
-        return view('projectTypes.index', ['projects' => $projecttypes]);
+        $projectTypes = ProjectType::all();
+
+        return view('projectTypes.index', [
+            'projects' => $projectTypes,
+        ]);
     }
 
     /**
@@ -36,15 +41,15 @@ class ProjectTypesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
-            ['name' => 'required']
-        );
+        $validated = $request->validate([
+            'name' => 'required',
+        ]);
 
-        DB::table('project_types')->insert(
-            ['name' => $request->name,]
-        );
+        DB::table('project_types')->insert([
+            'name' => $validated['name'],
+        ]);
 
-        return redirect('/types');
+        return redirect()->route('types.index');
     }
 
     /**

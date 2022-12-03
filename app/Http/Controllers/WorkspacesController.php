@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Workspace;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+use App\Models\ProjectType;
+use App\Models\Workspace;
 
 class WorkspacesController extends Controller
 {
@@ -16,10 +19,14 @@ class WorkspacesController extends Controller
     public function index()
     {
         $workspace = DB::table('workspaces as w')
-            ->join('project_types as types', 'w.project_type_id', '=', 'types.id')
-            ->select('w.id', 'w.title', 'types.name')
+            ->join('project_types as t', 'w.project_type_id', '=', 't.id')
+            ->where('w.user_id', '=', Auth::id())
+            ->select('w.id', 'w.title', 't.name')
             ->get();
-        return view('workspace.index', ['workspace' => $workspace]);
+
+        return view('workspace.index', [
+            'workspace' => $workspace,
+        ]);
     }
 
     /**
@@ -29,8 +36,11 @@ class WorkspacesController extends Controller
      */
     public function create()
     {
-        $projectType = DB::table('project_types')->get();
-        return view('workspace.create', ['types' => $projectType]);
+        $projectType = ProjectType::all();
+
+        return view('workspace.create', [
+            'types' => $projectType,
+        ]);
     }
 
     /**
@@ -41,23 +51,18 @@ class WorkspacesController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'projectTypeId' => 'required',
+            'title' => 'required',
+        ]);
 
-        $idUser = DB::table('users') //delete once Auth::user()->id can be implemented
-            ->where('users.id', 1)
-            ->value('users.id');
+        DB::table('workspaces')->insert([
+            'project_type_id' => $validated['projectTypeId'],
+            'user_id' => $request->user()->id,
+            'title' => $validated['title'],
+        ]);
 
-        $request->validate(
-            ['projectTypeId' => 'required',
-            'title' => 'required']
-        );
-
-        DB::table('workspaces')->insert(
-            ['project_type_id' => $request->projectTypeId,
-            'user_id' => $idUser, //change to Auth::user()->id
-            'title' => $request->title]
-        );
-
-        return redirect('/workspace');
+        return redirect()->route('workspace.index');
     }
 
     /**
@@ -79,9 +84,13 @@ class WorkspacesController extends Controller
      */
     public function edit($id)
     {
-        $projectType = DB::table('project_types')->get();
-        $workspace = DB::table('workspaces')->find($id);
-        return view('workspace.update', ['workspace' => $workspace, 'types' => $projectType]);
+        $projectTypes = ProjectType::all();
+        $workspace = Workspace::find($id);
+
+        return view('workspace.update', [
+            'workspace' => $workspace,
+            'types' => $projectTypes,
+        ]);
     }
 
     /**
@@ -93,19 +102,18 @@ class WorkspacesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(
-            ['projectTypeId' => 'required',
-            'title' => 'required']
-        );
-
+        $validated = $request->validate([
+            'projectTypeId' => 'required',
+            'title' => 'required',
+        ]);
 
         Workspace::where('id', $id)
-            ->update(
-                ['project_type_id' => $request->projectTypeId,
-                'title' => $request->title]
-            );
-        
-        return redirect('/workspace');     
+            ->update([
+                'project_type_id' => $validated['projectTypeId'],
+                'title' => $validated['title'],
+            ]);
+
+        return redirect()->route('workspace.index');
     }
 
     /**

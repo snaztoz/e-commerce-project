@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\WorkspacesController;
 use App\Http\Controllers\ProjectTypesController;
-use App\Models\Workspace;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,21 +23,16 @@ Route::get(
     }
 );
 
-Route::get(
-    '/dashboard',
-    function () {
-        return view('dashboard');
-    }
-)->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get(
+        '/dashboard',
+        function () {
+            return view('dashboard');
+        }
+    )->name('dashboard');
 
-Route::resource('workspace', WorkspacesController::class);
-Route::get('/workspace/create', [WorkspacesController::class, 'create']);
-Route::post('/workspace/store', [WorkspacesController::class, 'store']);
-Route::get('/workspace/{Workspace}/edit', [Workspace::class, 'edit']);
-Route::put('/workspace/{Workspace}', [Workspace::class, 'update']);
-
-Route::resource('types', ProjectTypesController::class);
-Route::get('/types/create', [ProjectTypesController::class, 'create']);
-Route::post('/types/store', [ProjectTypesController::class, 'store']);
+    Route::resource('workspace', WorkspacesController::class);
+    Route::resource('types', ProjectTypesController::class);
+});
 
 require __DIR__.'/auth.php';
