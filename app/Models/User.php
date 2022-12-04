@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -54,6 +55,20 @@ class User extends Authenticatable
 
     public function activeSubscription()
     {
-        // TODO
+        $latestSubscription = $this
+            ->subscriptions()
+            ->latest('start_date')
+            ->first();
+
+        if ($latestSubscription && $latestSubscription->start_date) {
+            $start = new Carbon($latestSubscription->start_date);
+            $end = new Carbon($latestSubscription->end_date);
+            $now = Carbon::now();
+            if ($now->betweenIncluded($start, $end)) {
+                return $latestSubscription;
+            }
+        }
+
+        return null;
     }
 }
