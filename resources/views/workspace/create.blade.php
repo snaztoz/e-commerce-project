@@ -3,7 +3,7 @@
 @section('content')
 <h1>Create new workspace</h1>
 
-<form action="/workspace/store" method="post">
+<form action="/workspace" method="post">
 		{{ csrf_field() }}
         <div class="form-group my-3">
 		    <label for="projectTypeId">nama</label>
